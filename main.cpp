@@ -66,6 +66,10 @@ void insertionSort(int* arrResults, string* arrTeams, int arrLength) {
     }
 }
 
+//Second commit here
+
+//And here
+
 void swap(int &a, int &b) {
     int tmp;
     tmp = a; a = b; b = tmp;
