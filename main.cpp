@@ -6,13 +6,13 @@ using namespace std;
 
 void insertionSort(int *, string*, int);
 void swap(int &, int &);
-void resParser(int*, string*, int, FILE*);
+void resParser(int*, string*, int);
 
 
 int main() {
     FILE *pFile = fopen("premier_league.csv", "r");
     if(pFile == nullptr) {
-        cout << "Error, please, check your file.";
+        cout << "Error, please, check your file.\n";
     } else {
         auto number = new char;             //
         fgets(number, sizeof(number), pFile);// Take the first number from file
@@ -48,14 +48,8 @@ int main() {
 
         insertionSort(resultPoints, resultTeams, amountOfTeams); //Sort two result arrays
 
-        //Checkout for arr
-        for(int i = 0; i < amountOfTeams; i++) {
-            cout << resultTeams[i] << ':' << resultPoints[i] << '\n';
-        }
-
-        FILE* pOutput = fopen("results.csv", "w");
-        resParser( resultPoints, resultTeams, amountOfTeams, pOutput );
-        //
+        resParser( resultPoints, resultTeams, amountOfTeams);
+        cout << "Read and write file success.\n" << "The winner is: " << resultTeams[0] << '\n';
     }
 }
 
@@ -77,8 +71,10 @@ void swap(int &a, int &b) {
     tmp = a; a = b; b = tmp;
 }
 
-void resParser(int* arrResults, string* arrTeams, int arrLength, FILE* pFile) {
+void resParser(int* arrResults, string* arrTeams, int arrLength) {
+    FILE* pOutput = fopen("results.csv", "w");
     for(int i = 0; i < arrLength; i++ ){
-        fprintf( pFile, "%s %c %d %c",  arrTeams[i].c_str(),':',arrResults[i],'\n');
+        fprintf( pOutput, "%s%c%d%c",  arrTeams[i].c_str(),':',arrResults[i],'\n');
     }
+    fclose(pOutput);
 }
