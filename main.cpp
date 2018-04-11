@@ -6,17 +6,19 @@ using namespace std;
 
 void insertionSort(int *, string*, int);
 void swap(int &, int &);
+void resParser(int*, string*, int, FILE*);
+
 
 int main() {
     FILE *pFile = fopen("premier_league.csv", "r");
     if(pFile == nullptr) {
-        cout << "Error";
+        cout << "Error, please, check your file.";
     } else {
-        auto *number = new char;             //
+        auto number = new char;             //
         fgets(number, sizeof(number), pFile);// Take the first number from file
         int amountOfTeams = atoi(number);    //
 
-        auto* resultPoints = new int[amountOfTeams];//
+        auto resultPoints = new int[amountOfTeams];//
         string resultTeams[amountOfTeams];          //Arrays of results
 
         char unparsedData[amountOfTeams][100];        //Read from file
@@ -25,8 +27,8 @@ int main() {
         }
         fclose(pFile);
 
-        string parsedData[amountOfTeams][11];         //Change for convenient format
-        for(int i = 0; i < amountOfTeams; i++) {      //by split for delimiter ","
+        string parsedData[amountOfTeams][11];         //Changing to convenient format
+        for(int i = 0; i < amountOfTeams; i++) {      //with splitting by delimiter ","
             char *pch = strtok(unparsedData[i], ",");
             for(int j = 0; j < 11; j++) {
                 parsedData[i][j] = pch;
@@ -50,6 +52,9 @@ int main() {
         for(int i = 0; i < amountOfTeams; i++) {
             cout << resultTeams[i] << ':' << resultPoints[i] << '\n';
         }
+
+        FILE* pOutput = fopen("results.csv", "w");
+        resParser( resultPoints, resultTeams, amountOfTeams, pOutput );
         //
     }
 }
@@ -70,4 +75,10 @@ void insertionSort(int* arrResults, string* arrTeams, int arrLength) {
 void swap(int &a, int &b) {
     int tmp;
     tmp = a; a = b; b = tmp;
+}
+
+void resParser(int* arrResults, string* arrTeams, int arrLength, FILE* pFile) {
+    for(int i = 0; i < arrLength; i++ ){
+        fprintf( pFile, "%s %c %d %c",  arrTeams[i].c_str(),':',arrResults[i],'\n');
+    }
 }
