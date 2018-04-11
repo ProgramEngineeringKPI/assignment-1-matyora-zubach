@@ -38,10 +38,15 @@ int main() {
         //Counting final results
         for(int i = 0; i < amountOfTeams; i++) {
             for(int j = 1; j < 11; j++) {
-                if(parsedData[i][j][0] > parsedData[i][j][2]) resultPoints[i] += 3;
-                if(parsedData[i][j][0] == parsedData[i][j][2]) resultPoints[i] += 1;
+                if(parsedData[i][j][0] != '-') {
+                    if (parsedData[i][j][0] > parsedData[i][j][2]) resultPoints[i] += 3;
+                    if (parsedData[i][j][0] == parsedData[i][j][2]) resultPoints[i] += 1;
+                } else resultPoints[i] += 1;
             }
         }
+
+        //New Git- commit
+        
         for(int i = 0; i < amountOfTeams; i++) {
             resultTeams[i] = parsedData[i][0];
         }
