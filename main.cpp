@@ -70,7 +70,7 @@ void swap(int &a, int &b) {
     int tmp;
     tmp = a; a = b; b = tmp;
 }
-
+//Test comment for git train
 void resParser(int* arrResults, string* arrTeams, int arrLength) {
     FILE* pOutput = fopen("results.csv", "w");
     for(int i = 0; i < arrLength; i++ ){
@@ -78,3 +78,8 @@ void resParser(int* arrResults, string* arrTeams, int arrLength) {
     }
     fclose(pOutput);
 }
+
+//Test comment for git train
+//Test comment for git train
+//Test comment for git train
+//Test comment for git train
